@@ -38,7 +38,7 @@ jobs:
             - ~/.m2
           key: v1-dependencies--{{ checksum "build.sbt" }}
 
-      - run: cat "I could finish"
+      - run: echo "I could finish"
 
   test:
     docker:
@@ -47,5 +47,5 @@ jobs:
     steps:
       - checkout
       - run:
-        - cat "Runing..."
+        - echo "Runing..."
         - sbt clean test

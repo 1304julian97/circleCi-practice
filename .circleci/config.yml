@@ -47,13 +47,25 @@ jobs:
       steps:
         - checkout
         - run: echo "Runing..."
-        - run: sbt clean test
+        - run: sbt clean test   test:
+
+    deploy:
+      docker:
+        - image: circleci/openjdk:8-jdk
+
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: echo "Deploy"
 
 
 
 workflows:
   version: 2
-  build:
+  validate:
     jobs:
       - build
       - test
+  deploy:
+    jobs:
+      - deploy

@@ -18,8 +18,11 @@
 
 * To validate if the file _config.yml_ is worote correctlly only run this:
   
-      circleci local execute --job <JobName>
+      circleci config validate
+
 
     
     
-    
+## Use the same docker image at different jobs
+
+* Read this => [Click here](https://support.circleci.com/hc/en-us/articles/360019182513-Build-Docker-image-in-one-job-and-use-in-another-job)

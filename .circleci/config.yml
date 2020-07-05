@@ -46,6 +46,5 @@ jobs:
 
     steps:
       - checkout
-      - run:
-        - echo "Runing..."
-        - sbt clean test
+      - run: echo "Runing..."
+      - run: sbt clean test

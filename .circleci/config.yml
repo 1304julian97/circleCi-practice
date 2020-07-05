@@ -58,7 +58,16 @@ jobs:
         - run: echo "Runing..."
         - run: echo "Deploy"
 
-   jobN5:
+   jobN4:
+      docker:
+        - image: circleci/openjdk:8-jdk
+
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: echo "Job#4"
+
+  jobN5:
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -89,6 +98,7 @@ workflows:
     jobs:
       - build
       - test
+      - jobN4
       - jobN5:
           requires:
             - build

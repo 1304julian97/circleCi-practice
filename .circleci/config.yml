@@ -55,6 +55,4 @@ jobs:
       build:
         jobs:
           - build
-      test:
-        jobs:
           - test

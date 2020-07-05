@@ -65,6 +65,6 @@ workflows:
   validate:
     jobs:
       - build
-      - test
-        requires
+      - test:
+        requires:
           - build

@@ -47,7 +47,7 @@ jobs:
       steps:
         - checkout
         - run: echo "Runing..."
-        - run: sbt clean test   test:
+        - run: sbt clean test
 
    deploy:
       docker:

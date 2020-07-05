@@ -49,7 +49,7 @@ jobs:
         - run: echo "Runing..."
         - run: sbt clean test   test:
 
-    deploy:
+   deploy:
       docker:
         - image: circleci/openjdk:8-jdk
 

@@ -50,3 +50,12 @@ jobs:
         - run: sbt clean test
 
 
+
+   workflows:
+      version: 2
+      build:
+        jobs:
+          - build
+      test:
+        jobs:
+          - test

@@ -40,15 +40,13 @@ jobs:
 
           - run: echo "I could finish"
 
+   test:
+      docker:
+        - image: circleci/openjdk:8-jdk
 
-
-  test:
-    docker:
-    - image: circleci/openjdk:8-jdk
-
-    steps:
-      - checkout
-      - run: echo "Runing..."
-      - run: sbt clean test
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: sbt clean test
 
 

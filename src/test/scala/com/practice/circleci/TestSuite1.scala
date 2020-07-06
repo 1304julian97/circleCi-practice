@@ -3,7 +3,7 @@ package com.practice.circleci
 import org.scalatest.{Outcome, fixture}
 
 
-class TestSuit1 extends fixture.FunSuite {
+class TestSuite1 extends fixture.FunSuite {
   override protected def withFixture(test: OneArgTest): Outcome = {
     val s1 = "1"
     val s2 = "2"

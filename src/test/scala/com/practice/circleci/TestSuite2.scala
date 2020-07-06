@@ -2,7 +2,7 @@ package com.practice.circleci
 
 import org.scalatest.{Outcome, fixture}
 
-class TestSuit2 extends fixture.FlatSpec{
+class TestSuite2 extends fixture.FlatSpec{
   override protected def withFixture(test: OneArgTest): Outcome = {
     println("Running fixture Suit 2")
     val s1 = "1"

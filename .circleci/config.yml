@@ -40,7 +40,8 @@ jobs:
 
           - run: echo "I could finish"
 
-   test:
+   testUnit:
+      name: Unit Test
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -58,7 +59,7 @@ jobs:
         - run: echo "Runing..."
         - run: echo "Deploy"
 
-   jobN4:
+   sonar:
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -67,7 +68,8 @@ jobs:
         - run: echo "Runing..."
         - run: echo "Job#4"
 
-   jobN5:
+   automationTest:
+      name: Automation Test
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -98,8 +100,8 @@ workflows:
     jobs:
       - build
       - test
-      - jobN4
-      - jobN5:
+      - sonar
+      - automationTest:
           requires:
             - build
             - test

@@ -99,12 +99,12 @@ workflows:
   validate:
     jobs:
       - build
-      - test
+      - testUnit
       - sonar
       - automationTest:
           requires:
             - build
-            - test
+            - testUnit
   deploy:
     jobs:
       - deploy

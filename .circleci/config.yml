@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/sample-config/ for more details
 #
-version: 2.1
+version: 2
 jobs:
    build:
         docker:
@@ -41,7 +41,6 @@ jobs:
           - run: echo "I could finish"
 
    testUnit:
-      name: Unit Test
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -69,7 +68,6 @@ jobs:
         - run: echo "Job#4"
 
    automationTest:
-      name: Automation Test
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -95,7 +93,7 @@ jobs:
 
 
 workflows:
-  version: 2.1
+  version: 2
   validate:
     jobs:
       - build

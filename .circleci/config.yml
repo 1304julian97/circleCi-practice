@@ -88,7 +88,7 @@ workflows:
           filters:
             branches:
               only:
-                - /feature\/[a-zA-Z0-9_]+[-]*[][a-zA-Z0-9_]+/
+                - /feature\/[a-zA-Z0-9_]+[-]*[a-zA-Z0-9_]+/
       - automationTest:
           filters:
             branches:

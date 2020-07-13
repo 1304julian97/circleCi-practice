@@ -40,7 +40,7 @@ jobs:
 
           - run: echo "I could finish"
 
-   test:
+   testUnit:
       docker:
         - image: circleci/openjdk:8-jdk
 
@@ -49,4 +49,70 @@ jobs:
         - run: echo "Runing..."
         - run: sbt clean test
 
+   deploy:
+      docker:
+        - image: circleci/openjdk:8-jdk
 
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: echo "Deploy"
+
+   sonar:
+      docker:
+        - image: circleci/openjdk:8-jdk
+
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: echo "Job#4"
+
+   automationTest:
+      docker:
+        - image: circleci/openjdk:8-jdk
+
+      steps:
+        - checkout
+        - run: echo "Runing..."
+        - run: echo "Job#5"
+
+
+
+#workflows:
+#  version: 2
+#  validate:
+#    jobs:
+#      - build
+#      - test:
+#          requires:
+#            - build
+#      - deploy:
+#          requires:
+#            - test
+
+
+
+workflows:
+  version: 2
+  validate:
+    jobs:
+      - build
+      - testUnit
+      - sonar:
+          filters:
+            branches:
+              only:
+                - /feature\/[^[a-zA-Z0-9_]+]
+      - automationTest:
+          filters:
+            branches:
+              only:
+                - develop
+                - master
+          requires:
+            - build
+            - testUnit
+            - sonar
+  deploy:
+    jobs:
+      - deploy

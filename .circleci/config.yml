@@ -62,12 +62,6 @@ jobs:
       docker:
         - image: circleci/openjdk:8-jdk
 
-      filters:
-        branches:
-          only:
-            #- /feature\/[^[a-zA-Z0-9_]+]
-            - master
-
       steps:
         - checkout
         - run: echo "Runing..."
@@ -76,12 +70,6 @@ jobs:
    automationTest:
       docker:
         - image: circleci/openjdk:8-jdk
-
-      filters:
-        branches:
-          only:
-            - develop
-            - master
 
       steps:
         - checkout
@@ -110,8 +98,17 @@ workflows:
     jobs:
       - build
       - testUnit
-      - sonar
+      - sonar:
+          filters:
+            branches:
+              only:
+                - /feature\/[^[a-zA-Z0-9_]+]
       - automationTest:
+          filters:
+            branches:
+              only:
+                - develop
+                - master
           requires:
             - build
             - testUnit

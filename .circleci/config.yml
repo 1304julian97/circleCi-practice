@@ -78,22 +78,6 @@ jobs:
 
 
 
-#workflows:
-#  version: 2
-#  validate:
-#    jobs:
-#      - build
-#      - test:
-#          requires:
-#            - build
-#      - deploy:
-#          requires:
-#            - test
-
-
-
-
-
 workflows:
   version: 2
   validate:
@@ -104,7 +88,7 @@ workflows:
           filters:
             branches:
               only:
-                - /feature\/[^[a-zA-Z0-9_]+]
+                - /feature\/[a-zA-Z0-9_]+[-]*[a-zA-Z0-9_]+/
       - automationTest:
           filters:
             branches:

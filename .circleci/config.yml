@@ -112,6 +112,7 @@ workflows:
           requires:
             - build
             - testUnit
+            - sonar
   deploy:
     jobs:
       - deploy

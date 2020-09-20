@@ -2,12 +2,12 @@ package com.practice.circleci
 
 import org.scalatest.{Outcome, flatspec}
 
-class TestSuite2 extends flatspec.FixtureAnyFlatSpec{
+class TestSuite6 extends flatspec.FixtureAnyFlatSpec{
   override protected def withFixture(test: OneArgTest): Outcome = {
-    println("Running fixture Suit 2")
+    println("Running fixture Suit 6")
     val s1 = "1"
     val s2 = "2"
-    test("1","2")
+    test(s1,s2)
   }
 
   override type FixtureParam = (String,String)
@@ -27,13 +27,13 @@ class TestSuite2 extends flatspec.FixtureAnyFlatSpec{
 
 
   it should "Testing something 1" in { f=>
-    println("Running test1")
+    println("Running test3")
     assert(true)
   }
 
 
   it should "Testing something 2" in { f=>
-    println("Running test2")
+    println("Running test4")
     assert(true)
   }
 

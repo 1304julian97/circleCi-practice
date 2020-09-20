@@ -3,7 +3,7 @@ package com.practice.circleci
 import org.scalatest.flatspec.AnyFlatSpecLike
 import org.scalatest.matchers.should.Matchers
 
-class TestSuite4 extends AnyFlatSpecLike with Matchers{
+class TestSuite8 extends AnyFlatSpecLike with Matchers{
 
   type Fixture = (String, String)
 

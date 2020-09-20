@@ -1,5 +1,6 @@
 package com.practice.circleci
 
+
 import org.scalatest.Tag
 import org.scalatest.flatspec.AnyFlatSpecLike
 import org.scalatest.matchers.should.Matchers
@@ -8,7 +9,7 @@ object TAG1 extends Tag("Example Tag")
 object TAG2 extends Tag("Example Tag2")
 
 
-class TestSuit3 extends AnyFlatSpecLike with Matchers{
+class TestSuit7 extends AnyFlatSpecLike with Matchers{
 
 
   trait FirstPart{

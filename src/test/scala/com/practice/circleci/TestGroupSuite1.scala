@@ -1,12 +1,11 @@
 package com.practice.circleci
 
-import org.scalatest.{DoNotDiscover, Ignore, Suite}
+import org.scalatest.{DoNotDiscover}
 import org.scalatest.funsuite.AnyFunSuite
-import org.scalatest.matchers.must.Matchers
 
 
 @DoNotDiscover
-class TestGroupSuite1 extends AnyFunSuite with Suite {
+class TestGroupSuite1 extends AnyFunSuite{
 
 
   test("Checking something 1"){

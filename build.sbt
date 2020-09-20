@@ -3,6 +3,7 @@ name := "circleCi-practice"
 version := "0.1"
 
 scalaVersion := "2.12.4"
+testOptions in Test += Tests.Argument("-P8")
 
 
 libraryDependencies ++= Seq(

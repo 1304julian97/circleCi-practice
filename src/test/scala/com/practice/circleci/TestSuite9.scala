@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit
 import monix.execution.Cancelable
 import org.scalatest.flatspec.AnyFlatSpecLike
 import org.scalatest.matchers.should.Matchers
-//import scala.concurrent.ExecutionContext.Implicits.global
 import monix.execution.Scheduler.{global => scheduler}
 import monix.eval.Task
 import scala.util.{Success, Failure}

@@ -5,6 +5,9 @@ import cats.implicits.{catsSyntaxTuple3Semigroupal, catsSyntaxValidatedIdBinComp
 import org.scalatest.flatspec.AnyFlatSpecLike
 import org.scalatest.matchers.should.Matchers
 
+/*
+Suite to practice Cats
+ */
 
 class TestSuite10 extends AnyFlatSpecLike with Matchers{
 
@@ -39,7 +42,7 @@ class TestSuite10 extends AnyFlatSpecLike with Matchers{
 
   def validateInt(int: Int): ValidationResult[Int] = {
     if(int <= 4) int.validNec
-    else "The int hes greater than 4".invalidNec
+    else "The int has to be greater than 4".invalidNec
   }
 
 
@@ -50,6 +53,14 @@ class TestSuite10 extends AnyFlatSpecLike with Matchers{
       validateInt(entity1.att3)
       ).mapN(EntityV)
     assert(validationResult.isValid,"The entity should be valid")
+    validationResult.toEither match {
+      case Left(listOfErrors) => listOfErrors.toNonEmptyList.map(x=>println(x))
+      case Right(entity) =>
+        assertResult(entity1,"The entities do not the same")(entity)
+        println(entity.att1)
+        println(entity.att2)
+        println(entity.att3)
+    }
   }
 
   it should "Validated Data structure (Invalid the first and last item)" in {
@@ -89,7 +100,8 @@ class TestSuite10 extends AnyFlatSpecLike with Matchers{
 
   it should "Create nonEmptyList using of method" in {
     val nonEmptyList = NonEmptyList.of(1,2,3,6)
-    assertResult(List(1,2,3,6),"The list is empty and for that, the NonEmptyList should be None")(nonEmptyList.toList)
+    assertResult(List(1,2,3,6),"The list is not empty and for that, the NonEmptyList should not be None")(nonEmptyList.toList)
   }
+
 
 }

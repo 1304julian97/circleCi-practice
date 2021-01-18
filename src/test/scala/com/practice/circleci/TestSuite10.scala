@@ -83,7 +83,7 @@ class TestSuite10 extends AnyFlatSpecLike with Matchers{
     eitherValue match {
       case Right(value) => fail(s"The object $value should not exist")
       case Left(value) => println(value.toNonEmptyList.toList.mkString(","))
-        assertResult(List("String has a incorrect size","The int hes greater than 4"),"The errors messages returned are not expected")(value.toNonEmptyList.toList)
+        assertResult(List("String has a incorrect size","The int has to be greater than 4"),"The errors messages returned are not expected")(value.toNonEmptyList.toList)
     }
     assert(validationResult.isInvalid,"The entity should not be valid")
   }

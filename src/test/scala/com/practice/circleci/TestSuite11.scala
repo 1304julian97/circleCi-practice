@@ -11,7 +11,6 @@ class TestSuite11 extends Matchers with AsyncFlatSpecLike{
   it should "Future. traverse" in {
     val list = List(1,2,3,4,5,6,7,7)
     val f: Int => Future[Int] = i => {
-      Thread.sleep(10000)
       Future(i+1)
     }
     val finalFuture: Future[List[Int]] = Future.traverse(list)(f)

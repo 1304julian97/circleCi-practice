@@ -27,14 +27,17 @@ class TestSuite9 extends AnyFlatSpecLike with Matchers{
 
   it should "Scheduler runnable" in {
     //Once run, it can not be stoped it
+    println(Thread.currentThread().getName)
     scheduler.execute(() => {
       val thread = Thread.currentThread().getName
       println(s"Hello, world! $thread")
     })
+    Thread.sleep(10000)
   }
 
 
   it should "cancelable - schedule Once- future" in {
+    println(Thread.currentThread().getName)
     val cancelable: Cancelable = scheduler.scheduleOnce(5, TimeUnit.SECONDS,
        () => {
          println("Thread into schedule "+Thread.currentThread().getName)
@@ -43,7 +46,7 @@ class TestSuite9 extends AnyFlatSpecLike with Matchers{
 
     //Another friendly way to do the same than above.
     val cancellableV2 = scheduler.scheduleOnce(5.seconds) {
-      println("Hello, world!")
+      println("Hello, world!"+Thread.currentThread().getName)
     }
 
     println(s"Main thread ${Thread.currentThread().getName}")
@@ -120,7 +123,36 @@ class TestSuite9 extends AnyFlatSpecLike with Matchers{
     Thread.sleep(7000)
   }
 
-//Task execution and call back are run in a different thread.
+  // Tasks get evaluated only on runToFuture!
+  //doOnCancel callback only will work when we run cancelable.cancel()
+  //If timeout method is activated, this one will return 'Task timed-out after 10 seconds of inactivity'. That means Future.Failure type
+  it should "task runToFuture approach with timeout" in {
+
+    println(s"Thread before task instance ${Thread.currentThread().getName}")
+    val task: Task[Int] = Task {
+      println(s"Thread into task ${Thread.currentThread().getName}")
+      Thread.sleep(50000)
+      1 + 1
+    }.timeout(10.seconds).doOnCancel(Task(println("Eyy The task was canceled")))
+    println(s"Thread after task instance ${Thread.currentThread().getName}")
+
+    // Tasks get evaluated only on runToFuture!
+    // Callback style:
+    val cancelable = task.runToFuture
+    cancelable.onComplete{ result =>
+      println(s"Thread into callback ${Thread.currentThread().getName}")
+      result match {
+        case Success(value) =>
+          println(value)
+        case Failure(ex) =>
+          System.out.println(s"ERROR: ${ex.getMessage}")
+      }
+    }
+    //cancelable.cancel()
+    Thread.sleep(70000)
+  }
+
+  //Task execution and call back are run in a different thread.
   it should "task with delay approach" in {
     val task = Task{
       println(s"Thread into task ${Thread.currentThread().getName}" )
@@ -158,9 +190,9 @@ class TestSuite9 extends AnyFlatSpecLike with Matchers{
     }
   }
 
-
+//If there is an exception doing the Task, the state Failure will be memoized anyway
   it should "Task memoized" in{
-    val task = Task.evalOnce { println("Effect1"); "Hello!" }
+    val task = Task.evalOnce { println("Effect1"); throw new Exception }
     val taskv2 = Task.eval{println("Effect2"); "Hello"}.memoize
 
     task.runAsync{case _ => println("HII")}
